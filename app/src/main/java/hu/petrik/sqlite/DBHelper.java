@@ -54,4 +54,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.query(TABLE_NAME, new String[]{ COL_ID, COL_VEZNEV, COL_KERNEV, COL_JEGY },
                 null, null, null, null, null);
     }
+
+    public int torles(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, COL_ID + " = ?", new String[]{id});
+    }
 }
