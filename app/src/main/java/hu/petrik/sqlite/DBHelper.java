@@ -2,8 +2,11 @@ package hu.petrik.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.sql.SQLTimeoutException;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "tanulok.db";
@@ -44,5 +47,11 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COL_JEGY, jegy);
 
         return db.insert(TABLE_NAME, null, values) != -1;
+    }
+
+    public Cursor listaz() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_NAME, new String[]{ COL_ID, COL_VEZNEV, COL_KERNEV, COL_JEGY },
+                null, null, null, null, null);
     }
 }
