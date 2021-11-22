@@ -1,5 +1,6 @@
 package hu.petrik.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -30,6 +31,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
 
+    public boolean rogzites(String vezeteknev, String keresztnev, String jegy) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_VEZNEV, vezeteknev);
+        values.put(COL_KERNEV, keresztnev);
+        values.put(COL_JEGY, jegy);
+
+        return db.insert(TABLE_NAME, null, values) != -1;
     }
 }
