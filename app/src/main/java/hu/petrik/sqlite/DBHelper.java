@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean rogzites(String vezeteknev, String keresztnev, String jegy) {
+    public boolean rogzites(String vezeteknev, String keresztnev, int jegy) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
